@@ -1,18 +1,12 @@
-import logging
 import os
 import shutil
 import subprocess
-import sys
 from pathlib import Path
 
 from behave import given, then, when  # pylint: disable=no-name-in-module
 from steps.utils import abs_path, read_configuration
 
 # pylint: disable=function-redefined
-
-
-def abs_path(path):
-    return Path.resolve(Path.expanduser(Path(path)))
 
 
 @given("we have sixwt installed")
