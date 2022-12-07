@@ -15,7 +15,7 @@ def step_impl(context):  # noqa: F811
 
 
 @given("sixwt is not properly configured")
-def step_impl(context):
+def step_impl(context):  # noqa: F811
 
     try:
         os.remove(context.scenario_config_file)
@@ -27,19 +27,19 @@ def step_impl(context):
 
 
 @given("sixwt is properly configured")
-def step_impl(context):
+def step_impl(context):  # noqa: F811
     assert context.scenario_config_file.is_file() is True
 
 
 @given("storage directory is missing")
-def step_impl(context):
+def step_impl(context):  # noqa: F811
     cfg = read_configuration(context.scenario_config_file)
     storage = abs_path(cfg["sixwt"]["storage_folder"])
     assert storage.is_dir() is False
 
 
 @given("storage directory exists")
-def step_impl(context):
+def step_impl(context):  # noqa: F811
     command = "sixwt init"
     completed_process = subprocess.run(
         command.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE
@@ -50,7 +50,7 @@ def step_impl(context):
 
 
 @given("storage directory exists with catalog examples")
-def step_impl(context):
+def step_impl(context):  # noqa: F811
     command = "sixwt init --with-examples"
     completed_process = subprocess.run(
         command.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE
@@ -61,7 +61,7 @@ def step_impl(context):
 
 
 @when('we run "{command}" non-interactively')
-def step_impl(context, command):
+def step_impl(context, command):  # noqa: F811
     completed_process = subprocess.run(
         command.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE
     )
@@ -71,7 +71,7 @@ def step_impl(context, command):
 
 
 @when('we run "{command}" with "{answers}"')
-def step_impl(context, command):
+def step_impl(context, command):  # noqa: F811
 
     if context.cli_options:
         command = command + " " + context.cli_options
@@ -101,19 +101,19 @@ def step_impl(context, command):
 
 
 @then('return code is "{return_code}"')
-def step_impl(context, return_code):
+def step_impl(context, return_code):  # noqa: F811
     assert context.return_code == int(return_code)
 
 
 @then('we see "{text}" on stdout')
-def step_impl(context, text):
+def step_impl(context, text):  # noqa: F811
     if context.stdout:
         print(">>>> out", context.stdout)
         assert text in context.stdout
 
 
 @then('we see "{text}" on stderr')
-def step_impl(context, text):
+def step_impl(context, text):  # noqa: F811
     if context.stderr:
         print(">>>> err", context.stderr)
         assert text in context.stderr
@@ -125,7 +125,7 @@ def step_impl(context, file_name):  # noqa: F811
 
 
 @then("storage directory exists")
-def step_impl(context):
+def step_impl(context):  # noqa: F811
     cfg = read_configuration(context.scenario_config_file)
     storage = abs_path(cfg["sixwt"]["storage_folder"])
     characters = storage.joinpath("characters")
@@ -136,7 +136,7 @@ def step_impl(context):
 
 
 @then("catalog examples are created")
-def step_impl(context):
+def step_impl(context):  # noqa: F811
     cfg = read_configuration(context.scenario_config_file)
     storage = abs_path(cfg["sixwt"]["storage_folder"])
     catalog = storage.joinpath("catalog")
@@ -145,7 +145,7 @@ def step_impl(context):
 
 
 @then("db file exists")
-def step_impl(context):
+def step_impl(context):  # noqa: F811
     cfg = read_configuration(context.scenario_config_file)
     storage = abs_path(cfg["sixwt"]["storage_folder"])
     db_file = storage.joinpath("sixwt.db")
