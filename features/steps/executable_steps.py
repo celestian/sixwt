@@ -45,8 +45,6 @@ def step_impl(context):  # noqa: F811
         command.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE
     )
     assert completed_process.returncode == 0
-    context.config.stdout_capture = None
-    context.config.stderr_capture = None
 
 
 @given("storage directory exists with catalog examples")
@@ -56,8 +54,6 @@ def step_impl(context):  # noqa: F811
         command.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE
     )
     assert completed_process.returncode == 0
-    context.config.stdout_capture = None
-    context.config.stderr_capture = None
 
 
 @when('we run "{command}" non-interactively')
