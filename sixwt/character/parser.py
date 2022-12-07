@@ -1,7 +1,6 @@
 import json
 
 from ..core.utils import does_file_exist
-from .character import Character
 
 
 class CharacterParser:
