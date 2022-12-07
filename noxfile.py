@@ -160,8 +160,8 @@ def behave(session: nox.Session) -> None:
     session.install(".")
     session.install("behave")
 
-    debug = int(os.getenv("SIXWT_BEHAVE_DEBUG", 0))
-    if debug:
+    debug = os.getenv("SIXWT_BEHAVE_DEBUG")
+    if debug and "1" == debug:
         session.run(
             "behave",
             "-v",
