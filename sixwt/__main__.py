@@ -60,7 +60,6 @@ def main():
 
     args = docopt(__doc__, version=__version__)
     config = Config(args, __version__)
-    # TODO incorporate license header
     print(config.app_header)
 
     if args["init"]:
@@ -74,8 +73,6 @@ def main():
 
     if args["update"] and args["db"]:
         if not does_file_exist(config.catalog_metatype):
-            # TODO separate function to check all example files
-            # TODO improve test @then("catalog examples are created")
             logging.error(
                 "Catalog file [%s] is missing.",
                 config.catalog_metatype,
