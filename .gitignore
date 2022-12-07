@@ -129,5 +129,6 @@ dmypy.json
 .pyre/
 
 # sixwt specific
+sixwt/_version.py
 sixwt.conf
 storage/
