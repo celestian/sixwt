@@ -43,7 +43,7 @@ def step_impl(context):  # noqa: F811
 def step_impl(context):  # noqa: F811
     command = "sixwt init"
     completed_process = subprocess.run(
-        command.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE
+        command.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=False
     )
     assert completed_process.returncode == 0
 
@@ -52,7 +52,7 @@ def step_impl(context):  # noqa: F811
 def step_impl(context):  # noqa: F811
     command = "sixwt init --with-examples"
     completed_process = subprocess.run(
-        command.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE
+        command.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=False
     )
     assert completed_process.returncode == 0
 
@@ -60,7 +60,7 @@ def step_impl(context):  # noqa: F811
 @when('we run "{command}" non-interactively')
 def step_impl(context, command):  # noqa: F811
     completed_process = subprocess.run(
-        command.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE
+        command.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=False
     )
     context.return_code = completed_process.returncode
     context.stdout = completed_process.stdout.decode("utf-8")
