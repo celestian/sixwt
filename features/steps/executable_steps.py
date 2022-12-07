@@ -1,3 +1,4 @@
+import errno
 import os
 import shutil
 import subprocess
@@ -19,8 +20,8 @@ def step_impl(context):  # noqa: F811
 
     try:
         os.remove(context.scenario_config_file)
-    except OSError:
-        if e.errno != errno.ENOENT:  # errno.ENOENT = no such file or directory
+    except OSError as error:
+        if error.errno != errno.ENOENT:  # errno.ENOENT = no such file or directory
             raise  # re-raise exception if a different error occurred
 
     assert context.scenario_config_file.is_file() is False
