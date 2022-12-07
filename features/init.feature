@@ -65,4 +65,4 @@ Feature: sixwt init
     Then return code is "0"
     And we see "ERROR: Database file" on stderr
     And we see "is missing" on stderr
-    And we see "You should run `sixwt update db`" on stdout
+    And we see "You should run `sixwt db update`" on stdout

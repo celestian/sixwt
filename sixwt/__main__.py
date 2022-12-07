@@ -91,7 +91,7 @@ def main():
 
     if not does_file_exist(config.database_file):
         logging.error("Database file [%s] is missing.", config.database_file)
-        print("You should run `sixwt update db`.")
+        print("You should run `sixwt db update`.")
         sys.exit()
 
     if args["wizard"]:
