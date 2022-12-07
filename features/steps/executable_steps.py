@@ -69,32 +69,7 @@ def step_impl(context, command):  # noqa: F811
 
 @when('we run "{command}" with "{answers}"')
 def step_impl(context, command):  # noqa: F811
-
-    if context.cli_options:
-        command = command + " " + context.cli_options
-
-    # TODO nacti answers, zadavej odpovedi do promptu
-
-    proc = subprocess.Popen(
-        command.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True
-    )
-    try:
-        outs, errs = proc.communicate(timeout=15)
-    except TimeoutExpired:
-        proc.kill()
-        outs, errs = proc.communicate()
-
-    # TODO remove
-
-
-#    print("[return_code] >>>", context.return_code)
-#    print("[completed_process.stdout] >>>", completed_process.stdout.decode("utf-8"))
-#    print(
-#        "[completed_process.stderr] >>>",
-#        completed_process.stderr.decode("utf-8"),
-#        file=sys.stderr,
-#    )
-#
+    raise NotImplementedError('WHEN: we run "{command}" with "{answers}"')
 
 
 @then('return code is "{return_code}"')
