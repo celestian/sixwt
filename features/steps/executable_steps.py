@@ -108,14 +108,12 @@ def step_impl(context, return_code):  # noqa: F811
 @then('we see "{text}" on stdout')
 def step_impl(context, text):  # noqa: F811
     if context.stdout:
-        print(">>>> out", context.stdout)
         assert text in context.stdout
 
 
 @then('we see "{text}" on stderr')
 def step_impl(context, text):  # noqa: F811
     if context.stderr:
-        print(">>>> err", context.stderr)
         assert text in context.stderr
 
 
