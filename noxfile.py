@@ -70,7 +70,7 @@ def pylint(session: nox.Session) -> None:
     session.install("nox")
 
     session.run("pylint", "./sixwt")
-    session.run("pylint", "./features")
+    session.run("pylint", "--rcfile=.pylintrc_features", "./features")
     session.run("pylint", "noxfile.py")
 
 

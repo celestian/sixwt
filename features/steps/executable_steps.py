@@ -6,7 +6,7 @@ import sys
 from pathlib import Path
 
 from behave import given, then, when  # pylint: disable=no-name-in-module
-from utils import abs_path, read_configuration
+from steps.utils import abs_path, read_configuration
 
 # pylint: disable=function-redefined
 
@@ -16,7 +16,7 @@ def abs_path(path):
 
 
 @given("we have sixwt installed")
-def step_impl(context):  # pylint: disable=unused-argument # noqa: F811
+def step_impl(context):  # noqa: F811
     assert shutil.which("sixwt") is not None
 
 
@@ -126,7 +126,7 @@ def step_impl(context, text):
 
 
 @then('file "{file_name}" is created')
-def step_impl(context, file_name):  # pylint: disable=unused-argument # noqa: F811
+def step_impl(context, file_name):  # noqa: F811
     assert Path(file_name).is_file()
 
 
