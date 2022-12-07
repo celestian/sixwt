@@ -18,8 +18,8 @@ def before_all(context):
 def after_all(context):
     """Clean up environment after all behaves"""
 
-    debug = int(os.getenv("SIXWT_BEHAVE_DEBUG", 0))
-    if debug:
+    debug = os.getenv("SIXWT_BEHAVE_DEBUG")
+    if debug and "1" == debug:
         print(f"DEBUG: Behave test dir is [{context.main_test_dir}]")
     else:
         shutil.rmtree(context.main_test_dir)
