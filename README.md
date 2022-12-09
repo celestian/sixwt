@@ -10,7 +10,7 @@ This is a tool for Shadowrun 6th edition.
     sudo dnf install nox sqlite
 
     # dependencies (for development)
-    sudo dnf install graphviz graphviz-devel
+    sudo dnf install python3-devel graphviz graphviz-devel
 
     # dev environment
     nox -s dev
