@@ -1,4 +1,5 @@
-import sys
+# Copyright (C) 2022 sixwt Contributors, see LICENSE
+
 from pathlib import Path
 
 from InquirerPy import inquirer
@@ -52,9 +53,3 @@ class WizardUI:
 
     def __q_continue_on_existing(self):
         print("Pokračujeme.")
-
-    def __quit(self, message):
-        if message:
-            print(message)
-        print("SixWT ended.")
-        sys.exit()
