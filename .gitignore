@@ -132,4 +132,7 @@ dmypy.json
 sixwt/_version.py
 sixwt.conf
 storage/
+
+# important exceptions
+!features/data/sixwt.conf
 !sixwt/storage/
