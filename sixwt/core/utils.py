@@ -1,3 +1,5 @@
+# Copyright (C) 2022 sixwt Contributors, see LICENSE
+
 import hashlib
 import os
 from pathlib import Path

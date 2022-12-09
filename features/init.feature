@@ -1,3 +1,5 @@
+# Copyright (C) 2022 sixwt Contributors, see LICENSE
+
 Feature: sixwt init
 
   Scenario: Missing configuration

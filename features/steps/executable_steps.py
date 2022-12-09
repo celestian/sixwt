@@ -1,3 +1,5 @@
+# Copyright (C) 2022 sixwt Contributors, see LICENSE
+
 import errno
 import os
 import shutil

@@ -1,3 +1,5 @@
+# Copyright (C) 2022 sixwt Contributors, see LICENSE
+
 import json
 from enum import Enum, auto
 

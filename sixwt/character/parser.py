@@ -1,3 +1,5 @@
+# Copyright (C) 2022 sixwt Contributors, see LICENSE
+
 import json
 
 from ..core.utils import does_file_exist
