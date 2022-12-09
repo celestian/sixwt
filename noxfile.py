@@ -8,8 +8,14 @@ import nox
 nox.options.sessions = [
     "black-3.10",
     "pylint-3.10",
+    "pylint_features-3.10",
+    "pylint_nox-3.10",
     "flake8-3.10",
+    "flake8_features-3.10",
+    "flake8_nox-3.10",
     "isort-3.10",
+    "isort_features-3.10",
+    "isort_nox-3.10",
     "behave-3.10",
 ]  # Sessions other than 'dev'
 
@@ -70,7 +76,27 @@ def pylint(session: nox.Session) -> None:
     session.install("nox")
 
     session.run("pylint", "./sixwt")
+
+
+@nox.session(python=["3.10"])
+def pylint_features(session: nox.Session) -> None:
+    """Runs pylint checks on python files"""
+    session.install(".")
+    session.install("pylint")
+    session.install("behave")
+    session.install("nox")
+
     session.run("pylint", "--rcfile=.pylintrc_features", "./features")
+
+
+@nox.session(python=["3.10"])
+def pylint_nox(session: nox.Session) -> None:
+    """Runs pylint checks on python files"""
+    session.install(".")
+    session.install("pylint")
+    session.install("behave")
+    session.install("nox")
+
     session.run("pylint", "noxfile.py")
 
 
@@ -81,7 +107,23 @@ def flake8(session: nox.Session) -> None:
     session.install("flake8")
 
     session.run("flake8", "--max-line-length=88", "./sixwt")
+
+
+@nox.session(python=["3.10"])
+def flake8_features(session: nox.Session) -> None:
+    """Runs flake8 checks on python files"""
+    session.install(".")
+    session.install("flake8")
+
     session.run("flake8", "--max-line-length=88", "./features")
+
+
+@nox.session(python=["3.10"])
+def flake8_nox(session: nox.Session) -> None:
+    """Runs flake8 checks on python files"""
+    session.install(".")
+    session.install("flake8")
+
     session.run("flake8", "--max-line-length=88", "noxfile.py")
 
 
@@ -92,7 +134,23 @@ def isort(session: nox.Session) -> None:
     session.install("isort")
 
     session.run("isort", "--check", "./sixwt")
+
+
+@nox.session(python=["3.10"])
+def isort_features(session: nox.Session) -> None:
+    """Run check import sorting using isort"""
+    session.install(".")
+    session.install("isort")
+
     session.run("isort", "--check", "./features")
+
+
+@nox.session(python=["3.10"])
+def isort_nox(session: nox.Session) -> None:
+    """Run check import sorting using isort"""
+    session.install(".")
+    session.install("isort")
+
     session.run("isort", "--check", "noxfile.py")
 
 
