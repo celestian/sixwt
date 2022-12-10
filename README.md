@@ -1,5 +1,6 @@
 # SixWT
-Six World Tool
+
+[![run_tests](https://github.com/celestian/sixwt/actions/workflows/run_tests.yml/badge.svg)](https://github.com/celestian/sixwt/actions/workflows/run_tests.yml)
 
 ## About
 This is a tool for Shadowrun 6th edition.
