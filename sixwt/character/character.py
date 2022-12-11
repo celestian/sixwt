@@ -51,8 +51,8 @@ def get_priority_value(args):
 
 class Character(FSMachine):
     def __init__(self, name):
-        self._name = " ".join(name)
-        self._priorities = {
+        self.__name = " ".join(name)
+        self.__priorities = {
             "a": None,
             "b": None,
             "c": None,
@@ -79,8 +79,8 @@ class Character(FSMachine):
 
     def get_data(self):
         return {
-            "name": self._name,
-            "priorities": self._priorities,
+            "name": self.__name,
+            "priorities": self.__priorities,
         }
 
     def make_graph(self):
@@ -95,20 +95,20 @@ class Character(FSMachine):
         value = get_priority_value(args)
 
         for i in ["a", "b", "c", "d", "e"]:
-            if str(value) == self._priorities[i]:
+            if str(value) == self.__priorities[i]:
                 raise ValueError(f"{value} was assigned before!")
 
-        self._priorities[priority] = str(value)
+        self.__priorities[priority] = str(value)
 
     def are_priorities_set(self, event):  # pylint: disable=unused-argument
         is_ready = True
         used = []
         for i in ["a", "b", "c", "d", "e"]:
-            if not self._priorities[i]:
+            if not self.__priorities[i]:
                 is_ready = False
 
-            if self._priorities[i] not in used:
-                used.append(self._priorities[i])
+            if self.__priorities[i] not in used:
+                used.append(self.__priorities[i])
             else:
                 is_ready = False
         return is_ready
