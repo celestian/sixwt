@@ -11,6 +11,13 @@ except ImportError:
 from transitions import Machine
 
 
+class BuildSystem(Enum):
+    PT_PRIORITY_TABLE = auto()
+    SUM_TO_TEN = auto()
+    POINT_BUY = auto()
+    LIFE_PATH = auto()
+
+
 class Priority(Enum):
     METATYPE = auto()
     ATTRIBUTES = auto()
@@ -21,8 +28,12 @@ class Priority(Enum):
 
 class States(Enum):
     INITIAL = auto()
-    PRIORITY = auto()
-    METATYPE = auto()
+    BS_PT_PRIORITY_TABLE = auto()
+    BS_SUM_TO_TEN = auto()
+    BS_POINT_BUY = auto()
+    BS_LIFE_PATH = auto()
+    PT_PRIORITY = auto()
+    PT_METATYPE = auto()
 
 
 def get_priority(args):
@@ -52,6 +63,7 @@ def get_priority_value(args):
 class Character(FSMachine):
     def __init__(self, name):
         self.__name = " ".join(name)
+        self.__build_system = None
         self.__priorities = {
             "a": None,
             "b": None,
@@ -60,18 +72,56 @@ class Character(FSMachine):
             "e": None,
         }
         FSMachine.__init__(self, states=States, send_event=True, initial=States.INITIAL)
+
+        # INITIAL --> BS_PT_PRIORITY_TABLE
         self.add_transition(
-            trigger="add_priority",
-            source=[States.INITIAL, States.PRIORITY],
-            dest=States.PRIORITY,
-            before="set_priority",
+            trigger="add_bs_priority_table",
+            source=States.INITIAL,
+            dest=States.BS_PT_PRIORITY_TABLE,
+            before="set_bs_priority_table",
         )
+
+        # INITIAL --> BS_SUM_TO_TEN
         self.add_transition(
-            trigger="add_metatype",
-            source=States.PRIORITY,
-            dest=States.METATYPE,
-            before="set_metatype",
-            conditions="are_priorities_set",
+            trigger="add_bs_sum_to_ten",
+            source=States.INITIAL,
+            dest=States.BS_SUM_TO_TEN,
+            before="set_bs_sum_to_ten",
+        )
+
+        # INITIAL --> BS_POINT_BUY
+        self.add_transition(
+            trigger="add_bs_point_buy",
+            source=States.INITIAL,
+            dest=States.BS_POINT_BUY,
+            before="set_bs_point_buy",
+        )
+
+        # INITIAL --> BS_LIFE_PATH
+        self.add_transition(
+            trigger="add_bs_life_path",
+            source=States.INITIAL,
+            dest=States.BS_LIFE_PATH,
+            before="set_bs_life_path",
+        )
+
+        # ------------------------
+
+        # BS_PT_PRIORITY_TABLE, PT_PRIORITY --> PT_PRIORITY
+        self.add_transition(
+            trigger="add_pt_priority",
+            source=[States.INITIAL, States.PT_PRIORITY],
+            dest=States.PT_PRIORITY,
+            before="set_pt_priority",
+        )
+
+        # PT_PRIORITY --> PT_METATYPE
+        self.add_transition(
+            trigger="add_pt_metatype",
+            source=States.PT_PRIORITY,
+            dest=States.PT_METATYPE,
+            before="set_pt_metatype",
+            conditions="are_pt_priorities_set",
         )
 
     def __repr__(self):
@@ -81,6 +131,7 @@ class Character(FSMachine):
         return {
             "name": self.__name,
             "priorities": self.__priorities,
+            "build_system": self.__build_system,
         }
 
     def make_graph(self):
@@ -89,7 +140,19 @@ class Character(FSMachine):
         else:
             print("Library Graphviz is missing.")
 
-    def set_priority(self, event):
+    def set_bs_priority_table(self, event):  # pylint: disable=unused-argument
+        self.__build_system = BuildSystem.PT_PRIORITY_TABLE
+
+    def set_bs_sum_to_ten(self, event):  # pylint: disable=unused-argument
+        self.__build_system = BuildSystem.SUM_TO_TEN
+
+    def set_bs_point_buy(self, event):  # pylint: disable=unused-argument
+        self.__build_system = BuildSystem.POINT_BUY
+
+    def set_bs_life_path(self, event):  # pylint: disable=unused-argument
+        self.__build_system = BuildSystem.LIFE_PATH
+
+    def set_pt_priority(self, event):
         args = event.kwargs.get("args", {})
         priority = get_priority(args)
         value = get_priority_value(args)
@@ -100,7 +163,7 @@ class Character(FSMachine):
 
         self.__priorities[priority] = str(value)
 
-    def are_priorities_set(self, event):  # pylint: disable=unused-argument
+    def are_pt_priorities_set(self, event):  # pylint: disable=unused-argument
         is_ready = True
         used = []
         for i in ["a", "b", "c", "d", "e"]:
@@ -113,6 +176,6 @@ class Character(FSMachine):
                 is_ready = False
         return is_ready
 
-    def set_metatype(self, event):  # pylint: disable=unused-argument
+    def set_pt_metatype(self, event):  # pylint: disable=unused-argument
         # args = event.kwargs.get("args", {})
         return

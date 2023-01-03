@@ -7,6 +7,7 @@ Usage:
   sixwt [--cfg=<cfg_file>] db update
   sixwt [--cfg=<cfg_file>] wizard
   sixwt [--cfg=<cfg_file>] build <character.swt>
+  sixwt [--cfg=<cfg_file>] debug fsm
   sixwt (-h | --help)
   sixwt --version
 
@@ -28,6 +29,7 @@ from .core.utils import does_dir_exist, does_file_exist
 from .example.catalog import generate_examples
 from .storage.database import DBStorage
 from .ui.wizard import WizardUI
+from .character.character import Character
 
 
 def check_storage(config):
@@ -95,6 +97,11 @@ def main():
 
     if args["wizard"]:
         WizardUI(config)
+        sys.exit()
+
+    if args["debug"] and args["fsm"]:
+        character = Character("Test")
+        character.make_graph()
         sys.exit()
 
 
